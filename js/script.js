@@ -52,53 +52,13 @@ const bancoDados = [
 ];
 
 function obterDados(pesquisaPor, valor) {
-    let dadosEncontrados = null;
-    let menorDistancia = Infinity;
-
-    for (let dados of bancoDados) {
-        if (pesquisaPor === 'crm' && dados.crm === valor) {
-            return dados;
-        } else if (pesquisaPor === 'nome') {
-            let nomeCompleto = dados.nome.toLowerCase();
-            if (nomeCompleto.includes(valor)) {
-                return dados;
-            }
-            let nomes = nomeCompleto.split(' ');
-            for (let nome of nomes) {
-                let distancia = calcularDistanciaLevenshtein(nome, valor);
-                if (distancia < menorDistancia) {
-                    menorDistancia = distancia;
-                    dadosEncontrados = dados;
-                }
-            }
-        }
+    if (pesquisaPor === 'crm') {
+        return bancoDados.find(dados => dados.crm === valor);
+    } else if (pesquisaPor === 'nome') {
+        valor = valor.toLowerCase();
+        return bancoDados.find(dados => dados.nome.toLowerCase().includes(valor));
     }
-    return dadosEncontrados;
-}
-
-function calcularDistanciaLevenshtein(a, b) {
-    const matrix = [];
-    let i;
-    for (i = 0; i <= b.length; i++) {
-        matrix[i] = [i];
-    }
-    let j;
-    for (j = 0; j <= a.length; j++) {
-        matrix[0][j] = j;
-    }
-    for (i = 1; i <= b.length; i++) {
-        for (j = 1; j <= a.length; j++) {
-            if (b.charAt(i - 1) === a.charAt(j - 1)) {
-                matrix[i][j] = matrix[i - 1][j - 1];
-            } else {
-                matrix[i][j] = Math.min(
-                    matrix[i - 1][j - 1] + 1,
-                    Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1)
-                );
-            }
-        }
-    }
-    return matrix[b.length][a.length];
+    return null;
 }
 
 function preencherDados(dados) {
