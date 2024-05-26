@@ -26,23 +26,63 @@ document.getElementById('pesquisar').addEventListener('click', function() {
 
 document.getElementById('fechar').addEventListener('click', function() {
     limparDados();
+    document.getElementById('mensagem-erro').textContent = '';
 });
 
+const bancoDados = [
+    { nome: 'Dr Alexander Flemming', crm: '999999', status: 'Ativo', especialidade: 'Clínico Geral', dataCadastro: '06/09/1891', login: 'alexander_flemming' },
+    { nome: 'Dr Sigmund Freud', crm: '888888', status: 'Ativo', especialidade: 'Neurologia', dataCadastro: '06/05/1856', login: 'sigmund_freud' },
+    { nome: 'Dr Edward Jenner', crm: '777777', status: 'Ativo', especialidade: 'Imunologia', dataCadastro: '17/05/1749', login: 'edward_jenner' },
+    { nome: 'Dr Joseph Lister', crm: '666666', status: 'Ativo', especialidade: 'Cirurgia', dataCadastro: '05/04/1827', login: 'joseph_lister' },
+    { nome: 'Dr Andreas Vesalius', crm: '555555', status: 'Ativo', especialidade: 'Anatomia', dataCadastro: '31/12/1514', login: 'andreas_vesalius' },
+    { nome: 'Dr William Osler', crm: '444444', status: 'Ativo', especialidade: 'Medicina Interna', dataCadastro: '12/07/1849', login: 'william_osler' },
+    { nome: 'Dr Ignaz Semmelweis', crm: '333333', status: 'Ativo', especialidade: 'Obstetrícia', dataCadastro: '01/07/1818', login: 'ignaz_semmelweis' },
+    { nome: 'Dr Hippocrates', crm: '222222', status: 'Ativo', especialidade: 'Medicina', dataCadastro: '01/01/460 AC', login: 'hippocrates' },
+    { nome: 'Dr Paracelsus', crm: '111111', status: 'Ativo', especialidade: 'Toxicologia', dataCadastro: '11/11/1493', login: 'paracelsus' },
+    { nome: 'Dr Avicenna', crm: '000000', status: 'Ativo', especialidade: 'Filosofia Médica', dataCadastro: '22/08/980', login: 'avicenna' }
+];
+
+function calcularDistanciaLevenshtein(a, b) {
+    const matrix = [];
+    let i;
+    for (i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
+    }
+    let j;
+    for (j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
+    for (i = 1; i <= b.length; i++) {
+        for (j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1,
+                    Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1)
+                );
+            }
+        }
+    }
+    return matrix[b.length][a.length];
+}
+
 function obterDados(pesquisaPor, valor) {
-    // Simulando um banco de dados
-    const bancoDados = [
-        { nome: 'Dr Alexander Flemming', crm: '999999', status: 'Ativo', especialidade: 'Clínico Geral', dataCadastro: '06/09/1891', login: 'alexander_flemming' },
-        // Adicione mais registros conforme necessário
-    ];
+    let dadosEncontrados = null;
+    let menorDistancia = Infinity;
 
     for (let dados of bancoDados) {
         if (pesquisaPor === 'crm' && dados.crm === valor) {
             return dados;
-        } else if (pesquisaPor === 'nome' && dados.nome.toLowerCase() === valor.toLowerCase()) {
-            return dados;
+        } else if (pesquisaPor === 'nome') {
+            let distancia = calcularDistanciaLevenshtein(dados.nome.toLowerCase(), valor.toLowerCase());
+            if (distancia < menorDistancia) {
+                menorDistancia = distancia;
+                dadosEncontrados = dados;
+            }
         }
     }
-    return null;
+    return dadosEncontrados;
 }
 
 function preencherDados(dados) {
