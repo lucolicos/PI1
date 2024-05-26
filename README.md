@@ -11,6 +11,8 @@ Junio Harnold de Souza Braz
 Kauan Pedro da Silva
 Lucas Oliveira Costalonga
 Marcio Danilo Colusso
+
+
 # OBJETIVO DO PROJETO
 O objetivo deste projeto é desenvolver e implementar um servidor web com banco de dados, a fim de melhorar um atendimento hospitalar. Tem o propósito de reduzir o tempo de espera dos pacientes e facilitar o acesso às informações de login dos médicos do atendimento na unidade hospitalar selecionada, visando melhorar a experiência geral de atendimento.
 
