@@ -1,11 +1,11 @@
-document.getElementById('limpar').addEventListener('click', function() {
+document.getElementById('botaoLimpar').addEventListener('click', function() {
     document.getElementById('consulta-form').reset();
-    document.getElementById('mensagem-erro').textContent = '';
+    document.getElementById('mensagemErro').textContent = '';
     limparDados();
     console.log('Dados limpos');
 });
 
-document.getElementById('pesquisar').addEventListener('click', function() {
+document.getElementById('botaoPesquisar').addEventListener('click', function() {
     realizarPesquisa();
 });
 
@@ -21,7 +21,7 @@ function realizarPesquisa() {
     console.log(`Pesquisa por: ${pesquisaPor}, Valor: ${inputPesquisa}`);
 
     if (inputPesquisa === '') {
-        document.getElementById('mensagem-erro').textContent = 'Por favor, insira um valor para pesquisa.';
+        document.getElementById('mensagemErro').textContent = 'Por favor, insira um valor para pesquisa.';
         return;
     }
 
@@ -30,17 +30,17 @@ function realizarPesquisa() {
     if (dados) {
         console.log('Dados encontrados:', dados);
         preencherDados(dados);
-        document.getElementById('mensagem-erro').textContent = '';
+        document.getElementById('mensagemErro').textContent = '';
     } else {
         console.log('Nenhum dado encontrado para a pesquisa:', inputPesquisa);
-        document.getElementById('mensagem-erro').textContent = 'NÃO FORAM ENCONTRADOS DADOS PARA SUA PESQUISA';
+        document.getElementById('mensagemErro').textContent = 'NÃO FORAM ENCONTRADOS DADOS PARA SUA PESQUISA';
         limparDados();
     }
 }
 
-document.getElementById('fechar').addEventListener('click', function() {
+document.getElementById('botaoFechar').addEventListener('click', function() {
     limparDados();
-    document.getElementById('mensagem-erro').textContent = '';
+    document.getElementById('mensagemErro').textContent = '';
     console.log('Fechar clicado, dados limpos');
 });
 
@@ -70,20 +70,20 @@ function obterDados(pesquisaPor, valor) {
 
 function preencherDados(dados) {
     console.log('Preenchendo dados:', dados);
-    document.getElementById('nome').value = dados.nome;
-    document.getElementById('crm-info').value = dados.crm;
-    document.getElementById('status').value = dados.status;
-    document.getElementById('especialidade').value = dados.especialidade;
-    document.getElementById('data-cadastro').value = dados.dataCadastro;
-    document.getElementById('login').value = dados.login;
+    document.getElementById('campoNome').value = dados.nome;
+    document.getElementById('campoCrm').value = dados.crm;
+    document.getElementById('campoStatus').value = dados.status;
+    document.getElementById('campoEspecialidade').value = dados.especialidade;
+    document.getElementById('campoDataCadastro').value = dados.dataCadastro;
+    document.getElementById('campoLogin').value = dados.login;
 }
 
 function limparDados() {
-    document.getElementById('nome').value = '';
-    document.getElementById('crm-info').value = '';
-    document.getElementById('status').value = '';
-    document.getElementById('especialidade').value = '';
-    document.getElementById('data-cadastro').value = '';
-    document.getElementById('login').value = '';
+    document.getElementById('campoNome').value = '';
+    document.getElementById('campoCrm').value = '';
+    document.getElementById('campoStatus').value = '';
+    document.getElementById('campoEspecialidade').value = '';
+    document.getElementById('campoDataCadastro').value = '';
+    document.getElementById('campoLogin').value = '';
     console.log('Campos de dados limpos');
 }
