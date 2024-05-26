@@ -39,9 +39,7 @@ function realizarPesquisa() {
 }
 
 document.getElementById('botaoFechar').addEventListener('click', function() {
-    limparDados();
-    document.getElementById('mensagemErro').textContent = '';
-    console.log('Fechar clicado, dados limpos');
+    fecharAplicativo();
 });
 
 const bancoDados = [
@@ -86,4 +84,13 @@ function limparDados() {
     document.getElementById('campoDataCadastro').value = '';
     document.getElementById('campoLogin').value = '';
     console.log('Campos de dados limpos');
+}
+
+function fecharAplicativo() {
+    console.log('Tentando fechar a janela...');
+    if (window.close) {
+        window.close();
+    } else {
+        alert('Por favor, feche a aba do navegador manualmente.');
+    }
 }
