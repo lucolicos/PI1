@@ -75,10 +75,13 @@ function obterDados(pesquisaPor, valor) {
         if (pesquisaPor === 'crm' && dados.crm === valor) {
             return dados;
         } else if (pesquisaPor === 'nome') {
-            let distancia = calcularDistanciaLevenshtein(dados.nome.toLowerCase(), valor.toLowerCase());
-            if (distancia < menorDistancia) {
-                menorDistancia = distancia;
-                dadosEncontrados = dados;
+            let nomes = dados.nome.toLowerCase().split(' ');
+            for (let nome of nomes) {
+                let distancia = calcularDistanciaLevenshtein(nome, valor.toLowerCase());
+                if (distancia < menorDistancia) {
+                    menorDistancia = distancia;
+                    dadosEncontrados = dados;
+                }
             }
         }
     }
