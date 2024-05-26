@@ -61,7 +61,7 @@ function obterDados(pesquisaPor, valor) {
         console.log('Resultado da busca por CRM:', resultado);
         return resultado;
     } else if (pesquisaPor === 'nome') {
-        let resultado = bancoDados.find(dados => dados.nome.toLowerCase().includes(valor));
+        let resultado = bancoDados.find(dados => dados.nome.toLowerCase().split(' ').some(parte => parte.includes(valor)));
         console.log('Resultado da busca por nome:', resultado);
         return resultado;
     }
