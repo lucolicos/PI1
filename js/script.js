@@ -83,6 +83,9 @@ function obterDados(pesquisaPor, valor) {
                     dadosEncontrados = dados;
                 }
             }
+            if (dados.nome.toLowerCase().includes(valor.toLowerCase())) {
+                return dados;
+            }
         }
     }
     return dadosEncontrados;
