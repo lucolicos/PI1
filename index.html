@@ -3,77 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta Univesp</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Consulta de Login</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
-        <!-- Homepage -->
-        <section id="homepage" class="section">
-            <img src="logo_univesp.png" alt="Univesp Logo">
-            <h1>PROJETO INTEGRADOR I</h1>
-            <h2>Universidade Virtual do Estado de São Paulo</h2>
-            <div class="integrantes">
-                <p>Integrantes:</p>
-                <p>Donizeti Bosco Pereira Borba, RA 2009796</p>
-                <p>Antonio Alexandre dos Reis, RA 2017352</p>
-                <p>Arthur Mendes Martins, RA 2010398</p>
-                <p>Leandro Fleury Comegno, RA 2010395</p>
-                <p>...</p>
-            </div>
-        </section>
-
-        <!-- Consulta -->
-        <section id="consulta" class="section">
-            <h2>CONSULTA</h2>
-            <form id="consultaForm">
-                <label for="searchType">PESQUISE SEU LOGIN</label>
+        <h1>Consulta</h1>
+        <div class="consulta">
+            <h2>PESQUISE SEU LOGIN</h2>
+            <form id="consulta-form">
+                <label>SELECIONE COMO VAI PESQUISAR:</label>
                 <div>
-                    <input type="radio" id="crm" name="searchType" value="CRM">
+                    <input type="radio" id="crm" name="pesquisaPor" value="crm" checked>
                     <label for="crm">CRM</label>
-                    <input type="radio" id="nome" name="searchType" value="NOME">
+                    <input type="radio" id="nome" name="pesquisaPor" value="nome">
                     <label for="nome">NOME</label>
                 </div>
-                <input type="text" id="searchInput" name="searchInput">
-                <button type="button" onclick="clearForm()">LIMPAR</button>
-                <button type="submit">PESQUISAR</button>
+                <input type="text" id="inputPesquisa" name="inputPesquisa">
+                <button type="button" id="limpar">LIMPAR</button>
+                <button type="button" id="pesquisar">PESQUISAR</button>
             </form>
-            <div id="result">
-                <!-- Resultados aparecerão aqui -->
+            <div id="mensagem-erro" class="mensagem-erro"></div>
+        </div>
+
+        <div class="informacoes">
+            <h3>Dados</h3>
+            <div>
+                <label>NOME</label>
+                <input type="text" id="nome" disabled>
             </div>
-        </section>
-
-        <!-- Consulta com informações -->
-        <section id="consultaInfo" class="section">
-            <h2>CONSULTA COM INFORMAÇÕES</h2>
-            <form>
-                <label for="nome">NOME</label>
-                <input type="text" id="nome" name="nome" readonly>
-                <label for="status">STATUS</label>
-                <input type="text" id="status" name="status" readonly>
-                <label for="especialidade">ESPECIALIDADE</label>
-                <input type="text" id="especialidade" name="especialidade" readonly>
-                <label for="dataCadastro">DATA CADASTRO</label>
-                <input type="text" id="dataCadastro" name="dataCadastro" readonly>
-                <label for="crm">CRM</label>
-                <input type="text" id="crm" name="crm" readonly>
-                <label for="login">SEU LOGIN É:</label>
-                <input type="text" id="login" name="login" readonly>
-                <button type="button" onclick="closeResult()">FECHAR</button>
-            </form>
-        </section>
-
-        <!-- Consulta com erro -->
-        <section id="consultaErro" class="section">
-            <h2>CONSULTA COM ERRO</h2>
-            <form>
-                <label for="searchInputErro">PESQUISE SEU LOGIN</label>
-                <input type="text" id="searchInputErro" name="searchInputErro" readonly>
-                <p>Não foram encontrados dados para sua pesquisa.</p>
-                <button type="button" onclick="closeResult()">FECHAR</button>
-            </form>
-        </section>
+            <div>
+                <label>CRM</label>
+                <input type="text" id="crm-info" disabled>
+            </div>
+            <div>
+                <label>STATUS</label>
+                <input type="text" id="status" disabled>
+            </div>
+            <div>
+                <label>ESPECIALIDADE</label>
+                <input type="text" id="especialidade" disabled>
+            </div>
+            <div>
+                <label>DATA CADASTRO</label>
+                <input type="text" id="data-cadastro" disabled>
+            </div>
+            <div>
+                <label>SEU LOGIN É:</label>
+                <input type="text" id="login" disabled>
+            </div>
+            <button type="button" id="fechar">FECHAR</button>
+        </div>
     </div>
-    <script src="scripts.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
