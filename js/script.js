@@ -5,8 +5,17 @@ document.getElementById('limpar').addEventListener('click', function() {
 });
 
 document.getElementById('pesquisar').addEventListener('click', function() {
+    realizarPesquisa();
+});
+
+document.getElementById('consulta-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    realizarPesquisa();
+});
+
+function realizarPesquisa() {
     const pesquisaPor = document.querySelector('input[name="pesquisaPor"]:checked').value;
-    const inputPesquisa = document.getElementById('inputPesquisa').value.trim();
+    const inputPesquisa = document.getElementById('inputPesquisa').value.trim().toLowerCase();
 
     if (inputPesquisa === '') {
         document.getElementById('mensagem-erro').textContent = 'Por favor, insira um valor para pesquisa.';
@@ -22,7 +31,7 @@ document.getElementById('pesquisar').addEventListener('click', function() {
         document.getElementById('mensagem-erro').textContent = 'NÃO FORAM ENCONTRADOS DADOS PARA SUA PESQUISA';
         limparDados();
     }
-});
+}
 
 document.getElementById('fechar').addEventListener('click', function() {
     limparDados();
@@ -41,6 +50,31 @@ const bancoDados = [
     { nome: 'Dr Paracelsus', crm: '111111', status: 'Ativo', especialidade: 'Toxicologia', dataCadastro: '11/11/1493', login: 'paracelsus' },
     { nome: 'Dr Avicenna', crm: '000000', status: 'Ativo', especialidade: 'Filosofia Médica', dataCadastro: '22/08/980', login: 'avicenna' }
 ];
+
+function obterDados(pesquisaPor, valor) {
+    let dadosEncontrados = null;
+    let menorDistancia = Infinity;
+
+    for (let dados of bancoDados) {
+        if (pesquisaPor === 'crm' && dados.crm === valor) {
+            return dados;
+        } else if (pesquisaPor === 'nome') {
+            let nomeCompleto = dados.nome.toLowerCase();
+            if (nomeCompleto.includes(valor)) {
+                return dados;
+            }
+            let nomes = nomeCompleto.split(' ');
+            for (let nome of nomes) {
+                let distancia = calcularDistanciaLevenshtein(nome, valor);
+                if (distancia < menorDistancia) {
+                    menorDistancia = distancia;
+                    dadosEncontrados = dados;
+                }
+            }
+        }
+    }
+    return dadosEncontrados;
+}
 
 function calcularDistanciaLevenshtein(a, b) {
     const matrix = [];
@@ -65,30 +99,6 @@ function calcularDistanciaLevenshtein(a, b) {
         }
     }
     return matrix[b.length][a.length];
-}
-
-function obterDados(pesquisaPor, valor) {
-    let dadosEncontrados = null;
-    let menorDistancia = Infinity;
-
-    for (let dados of bancoDados) {
-        if (pesquisaPor === 'crm' && dados.crm === valor) {
-            return dados;
-        } else if (pesquisaPor === 'nome') {
-            let nomes = dados.nome.toLowerCase().split(' ');
-            for (let nome of nomes) {
-                let distancia = calcularDistanciaLevenshtein(nome, valor.toLowerCase());
-                if (distancia < menorDistancia) {
-                    menorDistancia = distancia;
-                    dadosEncontrados = dados;
-                }
-            }
-            if (dados.nome.toLowerCase().includes(valor.toLowerCase())) {
-                return dados;
-            }
-        }
-    }
-    return dadosEncontrados;
 }
 
 function preencherDados(dados) {
