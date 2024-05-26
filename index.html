@@ -14,45 +14,45 @@
             <form id="consulta-form">
                 <label>SELECIONE COMO VAI PESQUISAR:</label>
                 <div>
-                    <input type="radio" id="crm" name="pesquisaPor" value="crm" checked>
-                    <label for="crm">CRM</label>
-                    <input type="radio" id="nome" name="pesquisaPor" value="nome">
-                    <label for="nome">NOME</label>
+                    <input type="radio" id="pesquisaCrm" name="pesquisaPor" value="crm" checked>
+                    <label for="pesquisaCrm">CRM</label>
+                    <input type="radio" id="pesquisaNome" name="pesquisaPor" value="nome">
+                    <label for="pesquisaNome">NOME</label>
                 </div>
                 <input type="text" id="inputPesquisa" name="inputPesquisa">
-                <button type="button" id="limpar">LIMPAR</button>
-                <button type="submit" id="pesquisar">PESQUISAR</button>
+                <button type="button" id="botaoLimpar">LIMPAR</button>
+                <button type="submit" id="botaoPesquisar">PESQUISAR</button>
             </form>
-            <div id="mensagem-erro" class="mensagem-erro"></div>
+            <div id="mensagemErro" class="mensagem-erro"></div>
         </div>
 
         <div class="informacoes">
             <h3>Dados</h3>
             <div>
                 <label>NOME</label>
-                <input type="text" id="nome" disabled>
+                <input type="text" id="campoNome" disabled>
             </div>
             <div>
                 <label>CRM</label>
-                <input type="text" id="crm-info" disabled>
+                <input type="text" id="campoCrm" disabled>
             </div>
             <div>
                 <label>STATUS</label>
-                <input type="text" id="status" disabled>
+                <input type="text" id="campoStatus" disabled>
             </div>
             <div>
                 <label>ESPECIALIDADE</label>
-                <input type="text" id="especialidade" disabled>
+                <input type="text" id="campoEspecialidade" disabled>
             </div>
             <div>
                 <label>DATA CADASTRO</label>
-                <input type="text" id="data-cadastro" disabled>
+                <input type="text" id="campoDataCadastro" disabled>
             </div>
             <div>
                 <label>SEU LOGIN É:</label>
-                <input type="text" id="login" disabled>
+                <input type="text" id="campoLogin" disabled>
             </div>
-            <button type="button" id="fechar">FECHAR</button>
+            <button type="button" id="botaoFechar">FECHAR</button>
         </div>
     </div>
     <script src="js/script.js"></script>
